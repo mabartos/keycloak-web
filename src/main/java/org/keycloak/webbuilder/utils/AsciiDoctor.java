@@ -2,8 +2,9 @@ package org.keycloak.webbuilder.utils;
 
 import org.apache.commons.io.IOUtils;
 import org.asciidoctor.Asciidoctor;
+import org.asciidoctor.Attributes;
 import org.asciidoctor.AttributesBuilder;
-import org.asciidoctor.OptionsBuilder;
+import org.asciidoctor.Options;
 import org.asciidoctor.SafeMode;
 import org.asciidoctor.ast.Document;
 import org.keycloak.webbuilder.Context;
@@ -23,8 +24,8 @@ import java.util.Map;
 
 public class AsciiDoctor {
 
-    private Asciidoctor asciidoctor;
-    private File rootDir;
+    private final Asciidoctor asciidoctor;
+    private final File rootDir;
     private Map<String, Object> globalAttributes;
 
     public AsciiDoctor(File rootDir) {
@@ -44,13 +45,19 @@ public class AsciiDoctor {
         Map<String, Object> a = new HashMap<>(globalAttributes);
         a.putAll(attr);
 
-        Map<String, Object> options = OptionsBuilder.options()
+        final Attributes attributes = Attributes.builder()
+                .attributes(a)
+                .sourceHighlighter("coderay")
+                .linkCss(true)
+                .build();
+
+        final Options options = Options.builder()
                 .baseDir(baseDir)
                 .docType("embedded")
                 .backend("html5")
-                .attributes(a)
+                .attributes(attributes)
                 .safe(SafeMode.UNSAFE)
-                .asMap();
+                .build();
 
         asciidoctor.convert(reader, writer, options);
 
@@ -70,15 +77,15 @@ public class AsciiDoctor {
     }
 
     private Map<String, Object> parseAttributes(String content, Map<String, Object> attributes) {
-        AttributesBuilder ab = AttributesBuilder.attributes().backend("html5");
+        AttributesBuilder ab = Attributes.builder().backend("html5");
         if (attributes != null) {
             ab.attributes(attributes);
         }
 
-        Map<String, Object> options = OptionsBuilder.options()
+        Options options = Options.builder()
                 .inPlace(true)
-                .attributes(ab.asMap())
-                .asMap();
+                .attributes(ab.build())
+                .build();
 
         Document document = asciidoctor.load(content, options);
         return document.getAttributes();
