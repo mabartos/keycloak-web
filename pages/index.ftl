@@ -41,16 +41,35 @@
 <div class="container mt-5">
     <div class="row mt-5">
         <div class="col">
-            <h2>Single-Sign On</h2>
+            <h2>Seamless Authentication</h2>
             <p>
-                Users authenticate with Keycloak rather than individual applications. This means that your applications
-                don't have to deal with login forms, authenticating users, and storing users. Once logged-in to
-                Keycloak, users don't have to login again to access a different application.
+                Keycloak handles the entire login experience — from passwords and passkeys to social login
+                and identity providers. Users can sign in with a fingerprint, face, security key, or phone,
+                and with usernameless authentication they don't even need to type a username.
             </p>
             <p>
-                This also applies to logout. Keycloak provides single-sign out, which means users only have to logout once to be
-                logged-out of all applications that use Keycloak.
+                Single sign-on gives users access to all connected applications after one login.
+                Step-up authentication requires stronger credentials for sensitive actions, while
+                single sign-out lets users log out everywhere at once.
             </p>
+            <div class="row text-center mt-4 gx-3">
+                <div class="col">
+                    <div class="text-primary mb-2"><i class="fa fa-lock fa-2x" aria-hidden="true"></i></div>
+                    <small class="text-body-secondary">Password</small>
+                </div>
+                <div class="col">
+                    <div class="text-primary mb-2"><i class="fa fa-fingerprint fa-2x" aria-hidden="true"></i></div>
+                    <small class="text-body-secondary">Biometrics</small>
+                </div>
+                <div class="col">
+                    <div class="text-primary mb-2"><i class="fa fa-key fa-2x" aria-hidden="true"></i></div>
+                    <small class="text-body-secondary">Security Key</small>
+                </div>
+                <div class="col">
+                    <div class="text-primary mb-2"><i class="fa fa-hashtag fa-2x" aria-hidden="true"></i></div>
+                    <small class="text-body-secondary">OTP &amp; more</small>
+                </div>
+            </div>
         </div>
         <div class="col-5 text-end d-none d-md-block">
             <img class="img-fluid shadow" src="resources/images/screen-login.png" alt="Screenshot showing a user's login screen as presented by Keycloak"/>
@@ -89,19 +108,49 @@
 
     <div class="row mt-5 border-top pt-5">
         <div class="col">
-            <h2>Admin Console</h2>
+            <h2>Identity for AI and Agents</h2>
             <p>
-                Through the admin console administrators can centrally manage all aspects of the Keycloak server.
+                AI agents need identity too. With token exchange, agents can securely act on behalf of users
+                using scoped tokens. DPoP binds tokens cryptographically to the agent, preventing replay
+                if intercepted.
             </p>
             <p>
-                They can enable and disable various features.  They can configure identity brokering and user federation.
+                Backchannel authentication (CIBA) lets agents request user approval without a browser,
+                and client policies enforce security requirements across all agent clients.
+            </p>
+        </div>
+        <div class="col-5 text-end d-none d-md-block">
+             <img class="img-fluid" src="resources/images/dia-agents.svg" alt="Diagram illustrating AI agent identity flow through Keycloak"/>
+        </div>
+    </div>
+
+    <div class="row mt-5 border-top pt-5">
+        <div class="col">
+            <h2>Organizations</h2>
+            <p>
+                Built-in multi-tenancy for B2B use cases. Create organizations, manage members, and configure
+                identity providers per tenant — all without custom code.
             </p>
             <p>
-                They can create and manage applications and services, and define fine-grained authorization
-                policies.
+                Organizations let you delegate administration, enforce organization-specific policies, and give each
+                tenant its own identity experience while sharing a single Keycloak deployment.
+            </p>
+        </div>
+        <div class="col-5 text-end d-none d-md-block">
+             <img class="img-fluid" src="resources/images/dia-organizations.svg" alt="Diagram illustrating multi-tenant organizations in Keycloak"/>
+        </div>
+    </div>
+
+    <div class="row mt-5 border-top pt-5">
+        <div class="col">
+            <h2>Management Consoles</h2>
+            <p>
+                Through the admin console, administrators can centrally manage all aspects of Keycloak — users,
+                applications, identity providers, fine-grained authorization policies, and more.
             </p>
             <p>
-                They can also manage users, including permissions and sessions.
+                Users get their own account console to manage profiles, passwords, two-factor authentication, and sessions.
+                They can also link accounts with social and identity providers.
             </p>
         </div>
         <div class="col-5 text-end d-none d-md-block">
@@ -111,44 +160,19 @@
 
     <div class="row mt-5 border-top pt-5">
         <div class="col">
-            <h2>Account Management Console</h2>
+            <h2>Standards and Security</h2>
             <p>
-                Through the account management console users can manage their own accounts. They can update the profile,
-                change passwords, and setup two-factor authentication.
+                Keycloak is built on standard protocols — OpenID Connect, OAuth 2.0, and SAML — and goes
+                beyond the basics with support for DPoP proof-of-possession tokens, Pushed Authorization Requests (PAR),
+                Client Initiated Backchannel Authentication (CIBA), and step-up authentication.
             </p>
             <p>
-                Users can also manage sessions as well as view history for the account.
-            </p>
-            <p>
-                If you've enabled social login or identity brokering users can also link their accounts with additional
-                providers to allow them to authenticate to the same account with different identity providers.
-            </p>
-        </div>
-        <div class="col-5 text-end d-none d-md-block">
-             <img class="img-fluid shadow" src="resources/images/screen-account.png" alt="Screenshot of the account management console"/>
-        </div>
-    </div>
-
-    <div class="row mt-5 border-top pt-5">
-        <div class="col">
-            <h2>Standard Protocols</h2>
-            <p>
-                Keycloak is based on standard protocols and provides support for OpenID Connect, OAuth 2.0, and SAML.
+                Client policies let you enforce security requirements across applications, ensuring consistent
+                protection across your entire deployment.
             </p>
         </div>
         <div class="col-5 text-end d-none d-md-block">
              <img class="img-fluid" src="resources/images/dia-protocols.png" alt="Logos of OpenID certification, SAML and OAuth 2.0" aria-hidden="true"/>
-        </div>
-    </div>
-
-    <div class="row mt-5 border-top pt-5">
-        <div class="col">
-            <h2>Authorization Services</h2>
-            <p>
-                If role based authorization doesn't cover your needs, Keycloak provides fine-grained authorization services as well.
-                This allows you to manage permissions for all your services from the Keycloak admin console and gives you the
-                power to define exactly the policies you need.
-            </p>
         </div>
     </div>
 </div>
@@ -167,18 +191,18 @@
 
 <div class="container bg-light mt-5 py-4 px-4 rounded-4">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
-        <@featuresEntry icon="fa-key" title="Single-Sign On" text="Login once to multiple applications"/>
+        <@featuresEntry icon="fa-key" title="Seamless Authentication" text="SSO, passkeys, social login, and step-up"/>
+        <@featuresEntry icon="fa-fingerprint" title="Passwordless and Passkeys" text="Sign in with biometrics, security keys, or a phone"/>
         <@featuresEntry icon="fa-exchange-alt" title="Standard Protocols" text="OpenID Connect, OAuth 2.0 and SAML 2.0"/>
-        <@featuresEntry icon="fa-cog" title="Centralized Management" text="For admins and users"/>
-        <@featuresEntry icon="fa-shield-alt" title="Adapters" text="Secure applications and services easily"/>
+        <@featuresEntry icon="fa-building" title="Organizations" text="Multi-tenant identity for B2B"/>
         <@featuresEntry icon="fa-users" title="LDAP and Active Directory" text="Connect to existing user directories"/>
         <@featuresEntry icon="fa-cloud" title="Social Login" text="Easily enable social login"/>
         <@featuresEntry icon="fa-cloud" title="Identity Brokering" text="OpenID Connect or SAML 2.0 IdPs"/>
-        <@featuresEntry icon="fa-bolt" title="High Performance" text="Lightweight, fast and scalable"/>
-        <@featuresEntry icon="fa-server" title="Clustering" text="For scalability and availability"/>
-        <@featuresEntry icon="fa-eye" title="Themes" text="Customize look and feel"/>
-        <@featuresEntry icon="fa-edit" title="Extensible" text="Customize through code"/>
-        <@featuresEntry icon="fa-lock" title="Password Policies" text="Customize password policies"/>
+        <@featuresEntry icon="fa-bolt" title="Cloud-Native" text="Kubernetes-ready, lightweight, and fast"/>
+        <@featuresEntry icon="fa-server" title="Scalability" text="Clustering and multi-site support"/>
+        <@featuresEntry icon="fa-chart-line" title="Observability" text="Tracing, metrics, logs, and Grafana dashboards"/>
+        <@featuresEntry icon="fa-edit" title="Extensible" text="Customize through SPIs and workflows"/>
+        <@featuresEntry icon="fa-user-shield" title="Fine-Grained Authorization" text="Manage permissions beyond simple roles"/>
     </div>
 </div>
 
